@@ -1,10 +1,10 @@
 package ir.moke.dandelion.websocket;
 
-public class MessageHandler implements Subject {
-    public static MessageHandler instance = new MessageHandler();
+public class MessageListenerHandler implements Subject {
+    public static MessageListenerHandler instance = new MessageListenerHandler();
     private MessageListener messageListener;
 
-    private MessageHandler() {
+    private MessageListenerHandler() {
     }
 
     @Override
