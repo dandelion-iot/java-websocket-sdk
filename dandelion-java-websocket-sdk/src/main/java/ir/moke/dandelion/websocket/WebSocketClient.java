@@ -1,5 +1,7 @@
 package ir.moke.dandelion.websocket;
 
+import ir.moke.dandelion.DandelionCredentialFactory;
+
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -14,7 +16,11 @@ public class WebSocketClient {
     }
 
     @OnMessage
-    public void onMessage(String msg) {
-        MessageListenerHandler.instance.notifyListener(msg);
+    public void onMessage(String msg)  {
+        if (msg.equals("#000001")) {
+            DandelionCredentialFactory.destroyToken();
+        } else {
+            MessageListenerHandler.instance.notifyListener(msg);
+        }
     }
 }

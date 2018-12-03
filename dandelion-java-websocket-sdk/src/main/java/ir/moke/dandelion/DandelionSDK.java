@@ -1,7 +1,6 @@
 package ir.moke.dandelion;
 
 import ir.moke.dandelion.model.Credential;
-import ir.moke.dandelion.web.DandelionCredentialFactory;
 import ir.moke.dandelion.websocket.MessageListenerHandler;
 import ir.moke.dandelion.websocket.MessageListener;
 import ir.moke.dandelion.websocket.WebSocketClient;
@@ -41,7 +40,8 @@ public class DandelionSDK {
 
             }
         } catch (Exception e) {
-            DandelionCredentialFactory.initialize();
+            System.out.println(e.getMessage());
+            DandelionCredentialFactory.destroyToken();
         }
     }
 

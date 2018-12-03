@@ -1,4 +1,4 @@
-package ir.moke.dandelion.web;
+package ir.moke.dandelion;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public abstract class DandelionCredentialFactory {
     private static final Logger logger = LoggerProducer.produceLogger();
     private static Properties properties = new Properties();
+    private static final String configFile = ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE ;
 
     public static void initialize() {
         if (!configurationFileExist()) {
@@ -30,7 +31,7 @@ public abstract class DandelionCredentialFactory {
     }
 
     private static boolean configurationFileExist() {
-        File file = new File(ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE);
+        File file = new File(configFile);
         return file.exists();
     }
 
@@ -69,12 +70,20 @@ public abstract class DandelionCredentialFactory {
     public static Credential getCredential() {
         Credential credential = new Credential();
         try {
-            properties.load(new FileReader(ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE));
+            properties.load(new FileReader(configFile));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warning(e.getMessage());
         }
         credential.setDeviceId(properties.getProperty("deviceId"));
         credential.setToken(properties.getProperty("token"));
         return credential;
+    }
+
+    public static void destroyToken() {
+        if (configurationFileExist()) {
+            File file = new File(configFile) ;
+            System.out.println("Destroy token");
+            file.deleteOnExit();
+        }
     }
 }

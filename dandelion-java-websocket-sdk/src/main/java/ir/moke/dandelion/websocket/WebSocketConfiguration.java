@@ -2,7 +2,7 @@ package ir.moke.dandelion.websocket;
 
 import ir.moke.dandelion.logger.LoggerProducer;
 import ir.moke.dandelion.model.Credential;
-import ir.moke.dandelion.web.DandelionCredentialFactory;
+import ir.moke.dandelion.DandelionCredentialFactory;
 
 import javax.websocket.ClientEndpointConfig;
 import java.util.Collections;
