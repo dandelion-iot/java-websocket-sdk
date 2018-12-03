@@ -75,3 +75,22 @@ project(":dandelion-java-websocket-sdk") {
         compile group: 'org.glassfish.tyrus.bundles', name: 'tyrus-standalone-client', version: '1.14'
     }
 }
+
+project(":example-client") {
+    archivesBaseName = "example-client"
+    version = "0.1"
+
+    jar {
+        manifest {
+            attributes(
+                    "Specification-Vendor": "Moke Software Inc",
+                    "Specification-Title": archivesBaseName,
+                    "Specification-Version": version,
+            )
+        }
+    }
+
+    dependencies {
+        compile project(':dandelion-java-websocket-sdk')
+    }
+}
