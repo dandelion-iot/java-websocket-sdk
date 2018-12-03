@@ -15,6 +15,6 @@ public class WebSocketClient {
 
     @OnMessage
     public void onMessage(String msg) {
-        MessageHandler.instance.notifyListener(msg);
+        MessageListenerHandler.instance.notifyListener(msg);
     }
 }

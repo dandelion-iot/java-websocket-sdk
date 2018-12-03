@@ -2,7 +2,7 @@ package ir.moke.dandelion;
 
 import ir.moke.dandelion.model.Credential;
 import ir.moke.dandelion.web.DandelionCredentialFactory;
-import ir.moke.dandelion.websocket.MessageHandler;
+import ir.moke.dandelion.websocket.MessageListenerHandler;
 import ir.moke.dandelion.websocket.MessageListener;
 import ir.moke.dandelion.websocket.WebSocketClient;
 
@@ -30,7 +30,7 @@ public class DandelionSDK {
     }
 
     public void registerMessageListener(Class<? extends MessageListener> messageListener) {
-        MessageHandler.instance.registerMessageListener(messageListener);
+        MessageListenerHandler.instance.registerMessageListener(messageListener);
     }
 
     public void start() {
