@@ -1,0 +1,9 @@
+.gradle/
+out/
+**/out/
+**/build/
+**/.sass-cache
+**/target/
+target/
+.idea/
+java-websocket.iml

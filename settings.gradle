@@ -1,0 +1,5 @@
+rootProject.name = 'WebSocket'
+
+include 'dandelion-java-websocket-sdk'
+
+include 'example-client'
