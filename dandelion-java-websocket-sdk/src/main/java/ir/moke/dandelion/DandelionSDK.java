@@ -16,7 +16,7 @@ public class DandelionSDK implements StatusListener {
 
     private WebSocketContainer container;
     private Session session;
-    private String endpoint;
+    private String endpoint = "ws://localhost:8080/channel/";
     private String url;
     private String apiKey;
     private int status;
@@ -41,7 +41,6 @@ public class DandelionSDK implements StatusListener {
         DandelionCredentialFactory.initialize();
         this.container = ContainerProvider.getWebSocketContainer();
         Credential credential = DandelionCredentialFactory.getCredential();
-        endpoint = "ws://localhost:8080/channel/";
         url = endpoint + apiKey + "/" + credential.getDeviceId();
     }
 
