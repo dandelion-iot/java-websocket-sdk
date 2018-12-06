@@ -36,7 +36,7 @@ subprojects {
 
 task deleteOutDirs(type: Delete) {
     file(".").list().each {
-        if (it.startsWith("dandelion")) {
+        if (it.startsWith("java") || it.startsWith("example")) {
             def subDirName = it
             file(it).list().each {
                 if (it == "out") {
@@ -56,8 +56,8 @@ task clean {
 }
 
 
-project(":dandelion-java-websocket-sdk") {
-    archivesBaseName = "dandelion-java-websocket-sdk"
+project(":java-websocket-sdk") {
+    archivesBaseName = "java-websocket-sdk"
     version = "0.3"
 
     jar {
@@ -91,6 +91,6 @@ project(":example-client") {
     }
 
     dependencies {
-        compile project(':dandelion-java-websocket-sdk')
+        compile project(':java-websocket-sdk')
     }
 }
