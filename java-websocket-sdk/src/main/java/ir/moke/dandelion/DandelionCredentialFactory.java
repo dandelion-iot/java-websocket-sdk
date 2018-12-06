@@ -3,8 +3,6 @@ package ir.moke.dandelion;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import ir.moke.dandelion.ClientConfig;
 import ir.moke.dandelion.logger.LoggerProducer;
 import ir.moke.dandelion.model.Credential;
 import org.json.JSONObject;
