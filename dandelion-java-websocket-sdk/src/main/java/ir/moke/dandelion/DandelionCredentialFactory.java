@@ -18,9 +18,9 @@ import java.util.logging.Logger;
 public abstract class DandelionCredentialFactory {
     private static final Logger logger = LoggerProducer.produceLogger();
     private static Properties properties = new Properties();
-    private static final String configFile = ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE ;
+    private static final String configFile = ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE;
 
-    public static void initialize() {
+    public static void initialize() throws Exception {
         if (!configurationFileExist()) {
             logger.info("Initialize client .");
             registerDevice();
@@ -35,15 +35,11 @@ public abstract class DandelionCredentialFactory {
         return file.exists();
     }
 
-    private static void registerDevice() {
+    private static void registerDevice() throws Exception {
         HttpResponse<JsonNode> jsonResponse = null;
-        try {
-            logger.info("Register new client on server .");
-            jsonResponse = Unirest.get(ClientConfig.HTTP_ENDPOINT + ClientConfig.TOKEN_URI)
-                    .asJson();
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
+        logger.info("Register new client on server .");
+        jsonResponse = Unirest.get(ClientConfig.HTTP_ENDPOINT + ClientConfig.TOKEN_URI)
+                .asJson();
         JSONObject jsonObject = jsonResponse.getBody().getObject();
         String token = jsonObject.getString("token");
         String deviceId = jsonObject.getString("deviceId");
@@ -58,10 +54,12 @@ public abstract class DandelionCredentialFactory {
             filePath.mkdirs();
         }
         try {
-            String clientConfigFile = ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE ;
+            String clientConfigFile = ClientConfig.STORAGE_DIRECTORY + ClientConfig.CLIENT_CONFIG_FILE;
             logger.info("Store token on " + clientConfigFile);
             FileWriter fileWriter = new FileWriter(clientConfigFile);
             properties.store(fileWriter, "Dandelion Client Configuration");
+            fileWriter.flush();
+            fileWriter.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,9 +79,9 @@ public abstract class DandelionCredentialFactory {
 
     public static void destroyToken() {
         if (configurationFileExist()) {
-            File file = new File(configFile) ;
-            System.out.println("Destroy token");
-            file.deleteOnExit();
+            File file = new File(configFile);
+            logger.warning("Token destroyed");
+            file.delete();
         }
     }
 }

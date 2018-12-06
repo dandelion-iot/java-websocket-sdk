@@ -16,8 +16,10 @@ public class WebSocketConfiguration extends ClientEndpointConfig.Configurator {
     @Override
     public void beforeRequest(Map<String, List<String>> headers) {
         Credential credential = DandelionCredentialFactory.getCredential();
-        logger.info("DeviceID : " + credential.getDeviceId());
-        logger.info("Token : " + credential.getToken());
-        headers.put("Authorization", Collections.singletonList("Bearer " + credential.getToken()));
+        String deviceId = credential.getDeviceId() ;
+        String token = credential.getToken() ;
+        logger.info("DeviceID : " + deviceId);
+        logger.info("Token : " + token);
+        headers.put("Authorization", Collections.singletonList("Bearer " + token));
     }
 }

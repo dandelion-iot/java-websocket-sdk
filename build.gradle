@@ -58,7 +58,7 @@ task clean {
 
 project(":dandelion-java-websocket-sdk") {
     archivesBaseName = "dandelion-java-websocket-sdk"
-    version = "0.2"
+    version = "0.3"
 
     jar {
         manifest {
